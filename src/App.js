@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useContext } from "react";
+import "./App.css";
+import useHook from "./hooks/useHook";
+import useCounter from "./hooks/useCounter";
+
+import AppContext from "./context";
 
 function App() {
+  // const [value, setValue] = useState(0);
+  const [teste, setTeste] = useState(0);
+  const [value, increment, decrement] = useCounter();
+  const [workshop] = useHook();
+  const { title } = useContext(AppContext);
+
+  // useEffect(() => {
+  //   setValue(1);
+  //   console.log(teste);
+  // }, [teste]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>
+        {title} - {value} - {workshop}
+      </h1>
+      <AppContext.Provider value={{ title: "Workshop" }}></AppContext.Provider>
+      <button
+        type='button'
+        onClick={() => {
+          // setValue(value + 1);
+          increment();
+        }}
+      >
+        Increment
+      </button>
+      <button
+        type='button'
+        onClick={() => {
+          setTeste(teste + 1);
+        }}
+      >
+        Teste
+      </button>
     </div>
   );
 }

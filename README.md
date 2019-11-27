@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## React Hooks
 
-## Available Scripts
+github.com/jpdemagalhaes
 
-In the project directory, you can run:
+### O que são?
 
-### `yarn start`
+- Acessar estado do componente sem ter uma classe
+- Funções para acessar os states do React
+- Há casos que hooks não substituem os components
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Vantagens
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Diminui o tamanho do bundle
+- Não tem mais HoC
+- Para Redux não precisamos mais usar os HoCs
+- Possibilita a migração gradativa de componentes para Hooks, pois foi pensada para ser retrocompatível
 
-### `yarn test`
+### Hooks mais comuns
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- useState
+- useEffect (gerenciador de eventos dentro dos hooks)
 
-### `yarn build`
+### Hooks mais específicos
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- useContext
+  Basicamente compartilha states/dados entre componentes pais e filhos
+  (tema light ou dark -> o meu subcomponente precisa saber qual é o estado do pai, sem precisar configurar o redux)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Criamos um context no pai da aplicação, criamos um consumer e não precisamos mais criar um prop dreaming.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Não mata o Redux, mas já tiramos a necessidade de usarmos o Redux para aplicações pequenas
 
-### `yarn eject`
+- useMemo/useCallback -> usado para não efetuar cálculos para os mesmos parâmetros.
+  Valores memorizados -> me permite não precisar calcular o mesmo valor para cada execução
+  Se a função for executada com os mesmos parâmetros, o react pega do próprio cache.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- useRef -> pega referencias dos campos para pegar valores e operações que queremos fazer.
+  os que não usam, o componente pega um setstate e acaba ficando menos performáticos.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+como conseguimos alterar o estado de uma propriedade usando a referência do componente?
+sobrescrever o setValue do componente de máscara e atualizar por referência
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- useLayoutEffect
+  é bem parecido com o useEffect, mas o useEffect não para a renderização da página.
+  o useLayoutEffect é executado antes do layout da página (ele bloqueia a renderização da tela).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- useReduxer -> é inferior ao redux
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- useContext só serve para usar o valor de um contexto (ele não altera)
